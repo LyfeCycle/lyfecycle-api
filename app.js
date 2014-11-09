@@ -1,9 +1,12 @@
+var port = 3000;
 var express = require('express');
 var app = express();
+var locations = require('./routes/locations');
 
-app.get('/test', function(req, res) {
-  res.type('text/plain');
-  res.send("it's working!");
-});
+// routes
 
-app.listen(process.env.PORT || 4730);
+app.get('/locations', locations.findAll);
+app.get('/locations/:id', locations.findById);
+
+app.listen(port);
+console.log('Listening on port ' + port);
