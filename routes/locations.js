@@ -58,7 +58,7 @@ exports.updateLocation = function(req, res) {
     console.log('Updating location: ' + id);
     console.log(JSON.stringify(location));
     db.collection('locations', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, location, {safe:true}, function(err, result) {
+        collection.update({'_id':new BSON.ObjectID(id.createHexFromString)}, location, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating location: ' + err);
                 res.send({'error':'An error has occurred'});
@@ -74,7 +74,7 @@ exports.deleteLocation = function(req, res) {
     var id = req.params.id;
     console.log('Deleting location: ' + id);
     db.collection('locations', function(err, collection) {
-        collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
+        collection.remove({'_id':new BSON.ObjectID(id.createHexFromString)}, {safe:true}, function(err, result) {
             if (err) {
                 res.send({'error':'An error has occurred - ' + err});
             } else {
