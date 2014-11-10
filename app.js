@@ -1,11 +1,13 @@
 var express = require('express');
 var locations = require('./routes/locations');
+var bb = require('express-busboy');
 
 // config
 
 var portNum = 3000;
 
 var app = express();
+bb.extend(app);
 
 
 if (app.get('env')) {
@@ -19,7 +21,6 @@ app.get('/locations/:id', locations.findById);
 app.post('/locations', locations.addLocation);
 app.put('/locations/:id', locations.updateLocation);
 app.delete('/locations/:id', locations.deleteLocation);
-
 app.post('/locations/reset', locations.resetDB);
 
 app.get('/test', function(req, res) {
