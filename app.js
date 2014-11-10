@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cool = require('cool-ascii-faces');
 var locations = require('./routes/locations');
 
 // config
@@ -12,8 +13,9 @@ if (app.get('env')) {
 }
 
 var portNum = 3000;
+app.set('port', (process.env.PORT || 5000))
 
-// routes
+// location routes
 
 app.get('/locations', locations.findAll);
 app.get('/locations/:id', locations.findById);
@@ -22,8 +24,14 @@ app.put('/locations/:id', locations.updateLocation);
 app.delete('/locations/:id', locations.deleteLocation);
 app.post('/locations/reset', locations.resetDB);
 
-app.get('/test', function(req, res) {
-    res.send("It's working!");
+// other routes
+
+app.get('/', function(req, res) {
+  res.send(cool());
+});
+
+app.get('/port', function(req, res) {
+    res.send('Listening on port ' + portNum);
 });
 
 // server start
