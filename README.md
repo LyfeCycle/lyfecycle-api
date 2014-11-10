@@ -1,3 +1,8 @@
+Lyfecycle's API
+=============
+
+Currently: get/post/put location data
+
 Localhost Setup
 =============
 
