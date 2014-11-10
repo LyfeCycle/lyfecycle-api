@@ -20,7 +20,5 @@ Localhost Setup
 =============
 
 - [Install MongoDB](http://docs.mongodb.org/manual/installation/)
-- Start MongoDB server by running
-	mongod
-- Start node server by running
-	node app.js
+- Start MongoDB server by running `mongod`
+- Start node server by running `node app.js`
