@@ -4,6 +4,8 @@ var mongo = require('mongodb');
 var BSON = mongo.BSONPure;
 var db = database.db(); 
 
+// routes
+
 exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving location: ' + id);
@@ -75,10 +77,9 @@ exports.resetDB = function(req, res) {
 	populateDB();
 	res.send('Database repopulated!');
 }
- 
-/*--------------------------------------------------------------------------------------------------------------------*/
-// Populate database with sample data -- Only used once: the first time the application is started.
-// You'd typically not find this code in a real-life app, since the database would already exist.
+
+// functions
+
 var populateDB = function() {
     var locations = [
     {

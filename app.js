@@ -3,9 +3,6 @@ var bodyParser = require('body-parser');
 var locations = require('./routes/locations');
 
 // config
-
-var portNum = 3000;
-
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
@@ -13,6 +10,8 @@ app.use(bodyParser.json()); // parse application/json
 if (app.get('env')) {
 	app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
 }
+
+var portNum = 3000;
 
 // routes
 

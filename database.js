@@ -1,8 +1,7 @@
 var mongo = require('mongodb');
- 
-var Server = mongo.Server,
-    Db = mongo.Db,
-    BSON = mongo.BSONPure;
+var Server = mongo.Server;
+var Db = mongo.Db;
+var BSON = mongo.BSONPure;
 
 var mongoPort = 27017;
 
@@ -24,7 +23,6 @@ db.open(function(err, db) {
     	console.log('Is there a MongoDB server running?');
     }
 });
-
 
 exports.db = function() {
 	return db;
