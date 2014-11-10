@@ -1,14 +1,16 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var locations = require('./routes/locations');
-var bb = require('express-busboy');
 
 // config
 
 var portNum = 3000;
 
 var app = express();
-bb.extend(app);
-
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 
 if (app.get('env')) {
 	app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
@@ -26,5 +28,8 @@ app.post('/locations/reset', locations.resetDB);
 app.get('/test', function(req, res) {
     res.send("It's working!");
 });
+
+// server start
+
 app.listen(portNum);
 console.log('Listening on port ' + portNum);
