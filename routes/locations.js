@@ -3,11 +3,14 @@ var mongo = require('mongodb');
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
- 
-var server = new Server('localhost', 27017, {auto_reconnect: true});
+
+var mongoPort = 27017;
+
+var server = new Server('localhost', mongoPort, {auto_reconnect: true});
 db = new Db('locationdb', server);
  
 db.open(function(err, db) {
+	console.log('Opening db');
     if(!err) {
         console.log("Connected to 'locationdb' database");
         db.collection('locations', {strict:true}, function(err, collection) {
@@ -16,6 +19,10 @@ db.open(function(err, db) {
                 populateDB();
             }
         });
+    } else if (err) {
+    	console.log(err);
+    	console.log("The 'locations' collection doesn't exist. Creating it with sample data...");
+        populateDB();
     }
 });
  

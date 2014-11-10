@@ -7,10 +7,10 @@ var portNum = 3000;
 
 var app = express();
 
-app.configure(function () {
-    app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
-    app.use(express.bodyParser());
-});
+
+if (app.get('env')) {
+	app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
+}
 
 // routes
 
@@ -20,5 +20,8 @@ app.post('/locations', locations.addLocation);
 app.put('/locations/:id', locations.updateLocation);
 app.delete('/locations/:id', locations.deleteLocation);
 
+app.get('/test', function(req, res) {
+    res.send("It's working!");
+});
 app.listen(portNum);
 console.log('Listening on port ' + portNum);

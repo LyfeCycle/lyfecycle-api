@@ -15,3 +15,8 @@ lyfecycle-api
 
 ###Modify location by _id:
 	curl -i -X PUT -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.345"}' http://localhost:3000/locations/12345
+
+Localhost Setup
+=============
+
+- [Install MongoDB](http://docs.mongodb.org/manual/installation/)
