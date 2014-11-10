@@ -1,10 +1,17 @@
-lyfecycle-api
+Localhost Setup
+=============
+
+- [Install MongoDB](http://docs.mongodb.org/manual/installation/)
+- Start a local MongoDB server by running `mongod`
+- Start a local node server by running `node app.js` from inside the project root
+
+Curl Requests
 =============
 
 ###List all locations:
 	curl -i -X GET http://127.0.0.1:3000/locations
 
-### Get location by _id:
+###Get location by _id:
 	curl -i -X GET http://127.0.0.1:3000/locations/12345
 
 ###Delete location by _id:
@@ -15,10 +22,3 @@ lyfecycle-api
 
 ###Modify location by _id:
 	curl -i -X PUT -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.345"}' http://127.0.0.1:3000/locations/12345
-
-Localhost Setup
-=============
-
-- [Install MongoDB](http://docs.mongodb.org/manual/installation/)
-- Start MongoDB server by running `mongod`
-- Start node server by running `node app.js`
