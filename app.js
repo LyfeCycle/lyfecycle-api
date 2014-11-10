@@ -20,6 +20,8 @@ app.post('/locations', locations.addLocation);
 app.put('/locations/:id', locations.updateLocation);
 app.delete('/locations/:id', locations.deleteLocation);
 
+app.post('/locations/reset', locations.resetDB);
+
 app.get('/test', function(req, res) {
     res.send("It's working!");
 });

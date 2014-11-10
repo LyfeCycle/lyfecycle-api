@@ -6,7 +6,7 @@ var Server = mongo.Server,
 
 var mongoPort = 27017;
 
-var server = new Server('localhost', mongoPort, {auto_reconnect: true});
+var server = new Server('127.0.0.1', mongoPort, {auto_reconnect: true});
 db = new Db('locationdb', server);
  
 db.open(function(err, db) {
@@ -21,8 +21,7 @@ db.open(function(err, db) {
         });
     } else if (err) {
     	console.log(err);
-    	console.log("The 'locations' collection doesn't exist. Creating it with sample data...");
-        populateDB();
+    	console.log('Is there a MongoDB server running?');
     }
 });
  
@@ -91,34 +90,33 @@ exports.deleteLocation = function(req, res) {
         });
     });
 }
+
+exports.resetDB = function(req, res) {
+	console.log('Repopulating database');
+	populateDB();
+	res.send('Database repopulated!');
+}
  
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateDB = function() {
- 
     var locations = [
     {
-        name: "CHATEAU DE SAINT COSME",
-        year: "2009",
-        grapes: "Grenache / Syrah",
-        country: "France",
-        region: "Southern Rhone",
-        description: "The aromas of fruit and spice...",
-        picture: "saint_cosme.jpg"
+        name: "Place 1",
+        latitude: "42.349882",
+        longitude: "-71.104498"
     },
     {
-        name: "LAN RIOJA CRIANZA",
-        year: "2006",
-        grapes: "Tempranillo",
-        country: "Spain",
-        region: "Rioja",
-        description: "A resurgence of interest in boutique vineyards...",
-        picture: "lan_rioja.jpg"
+        name: "Place 2",
+        latitude: "42.350516",
+        longitude: "-71.112051"
     }];
  
     db.collection('locations', function(err, collection) {
-        collection.insert(locations, {safe:true}, function(err, result) {});
+    	collection.remove({}, function() {
+    		collection.insert(locations, {safe:true}, function(err, result) {});
+    	});
     });
  
 };
