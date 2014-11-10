@@ -29,7 +29,7 @@ exports.findById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving location: ' + id);
     db.collection('locations', function(err, collection) {
-        collection.findOne({'_id': new BSON.ObjectID(id.createHexFromString)}, function(err, item) {
+        collection.findOne({'_id': new BSON.ObjectID(id)}, function(err, item) {
         	res.send(item);
         });
     });
@@ -64,7 +64,7 @@ exports.updateLocation = function(req, res) {
     console.log('Updating location: ' + id);
     console.log(JSON.stringify(location));
     db.collection('locations', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id.createHexFromString)}, location, {safe:true}, function(err, result) {
+        collection.update({'_id':new BSON.ObjectID(id)}, location, {safe:true}, function(err, result) {
             if (err) {
                 console.log('Error updating location: ' + err);
                 res.send({'error':'An error has occurred'});

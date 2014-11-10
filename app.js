@@ -7,10 +7,8 @@ var locations = require('./routes/locations');
 var portNum = 3000;
 
 var app = express();
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
 
 if (app.get('env')) {
 	app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
