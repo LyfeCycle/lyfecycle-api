@@ -23,8 +23,13 @@ module.exports.listen = function(portNum) {
 app.get('/', function(req, res){
 	res.send('info at: https://github.com/LyfeCycle/lyfecycle-api');
 });
+
 app.get('/locations', function(req, res){
-	module.context.db.allLocations(res, req);
+	module.context.db.allLocations(req, res);
+});
+
+app.post('/locations', function(req, res){
+	module.context.db.addLocation(req, res);
 });
 
 
