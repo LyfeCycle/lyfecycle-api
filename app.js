@@ -1,5 +1,6 @@
 var mongo = require('mongodb');
 var express = require('express');
+var bodyParser = require('body-parser');
 var monk = require('monk');
 var cool = require('cool-ascii-faces');
 var database = require('./database');
@@ -10,6 +11,8 @@ var context;
 module.exports.init = function(context, callback) {
 	module.context = context;
 	app.use(express.static(__dirname + '/public'));
+	app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
+	app.use(bodyParser.json()); // parse application/json
 	callback(null);
 }
 
