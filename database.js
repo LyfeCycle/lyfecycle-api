@@ -1,6 +1,7 @@
 var mongo = require('mongodb');
 var monk = require('monk');
-var validate = require('./validations');
+var allgood = require('allgood'),
+    valid = allgood.valid;
 
 
 var context;
@@ -30,7 +31,7 @@ module.exports.reset = function(req, res) {
 
 module.exports.addLocation = function(req, res) {
     json = req.body;
-  if (!validate.validLocation(json)) {
+  if (!valid(locationSchema, json)) {
     console.log('Invalid location!');
     res.json('Invalid location!');
   } else {
@@ -47,3 +48,10 @@ module.exports.addLocation = function(req, res) {
     });
   }
 }
+
+// define the keys we want all locations to have
+var locationSchema = {
+    "name":"string",
+    "latitude":"string",
+    "longitude":"string"
+};
