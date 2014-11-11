@@ -5,8 +5,9 @@ var Db = mongo.Db;
 var BSON = mongo.BSONPure;
 
 var mongoPort = 27017;
+var mongoURL = (process.env.MONGOLAB_URI || 'localhost');
 
-var server = new Server('localhost', mongoPort, {auto_reconnect: true});
+var server = new Server(mongoURL, mongoPort, {auto_reconnect: true});
 db = new Db('locationdb', server, {safe: true});
  
 db.open(function(err, db) {
