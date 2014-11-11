@@ -17,7 +17,13 @@ db.open(function(err, db) {
         db.collection('locations', {safe:true}, function(err2, collection) {
             if (err2) {
                 console.log("The 'locations' collection doesn't exist. Creating it with sample data...");
-                locations.populateDB();
+                try {
+                    console.log('trying to populate DB');
+                    locations.populateDB();
+                }
+                catch(err) {
+                    console.log(err);
+                }
             }
         });
     } else if (err) {
