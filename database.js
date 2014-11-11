@@ -1,5 +1,7 @@
 var mongo = require('mongodb');
 var monk = require('monk');
+var validate = require('./validations');
+
 
 var context;
 var locations;
@@ -21,11 +23,24 @@ module.exports.allLocations = function(req, res) {
     });
 }
 
+module.exports.reset = function(req, res) {
+ locations.remove({});
+ count = locations.count;
+ if (count == 0) {
+    console.log('All locations removed!');
+ } else {
+    console.log('There are ' + count + ' locations');
+ }
+ res.send('Reset locations!');
+}
+
 module.exports.addLocation = function(req, res) {
-  newLocation = req.body;
-  if (!newLocation) {
-    res.json('Request body was empty!');
+    json = req.body;
+  if (!validate.validLocation(json)) {
+    console.log('Invalid location!');
+    res.json('Invalid location!');
   } else {
+    newLocation = {}
     locations.insert(newLocation, function(err, doc){
         console.log('Trying to add a location...');
         if(err) {

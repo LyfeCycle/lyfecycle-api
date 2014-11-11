@@ -34,6 +34,10 @@ app.post('/locations', function(req, res){
 	module.context.db.addLocation(req, res);
 });
 
+app.post('/locations/reset', function(req, res){
+	module.context.db.reset(req, res);
+});
+
 app.get('/face', function(req, res) {
   res.send(cool());
 });
