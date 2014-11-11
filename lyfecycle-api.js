@@ -11,20 +11,16 @@ context.settings = require('./settings');
 async.series([setupDatabase, setupApp, listen], ready);
 
 function setupDatabase(callback) {
-  console.log('setupDatabase');
 	context.db = require('./database');
-  console.log('context.db: ' + context.db);
 	context.db.init(context, callback);
 }
 
 function setupApp(callback) {
-  console.log('setupApp');
-	  context.app = require('./app');
-	  context.app.init(context, callback);
+  context.app = require('./app');
+  context.app.init(context, callback);
 }
 
 function listen(callback) {
-  console.log('listen');
   context.app.listen(context.settings.portNum);
   callback(null); // don't do anything
 }
