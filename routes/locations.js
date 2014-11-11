@@ -94,9 +94,14 @@ exports.populateDB = function() {
     }];
  
     db.collection('locations', function(err, collection) {
-    	collection.remove({}, function() {
-    		collection.insert(locations, {safe:true}, function(err, result) {});
-    	});
+        if (!err) {
+            collection.remove({}, function() {
+                collection.insert(locations, {safe:true}, function(err, result) {});
+            });
+        } else {
+            console.log(err);
+        }
+    	
     });
  
 };
