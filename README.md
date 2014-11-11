@@ -7,7 +7,6 @@ Localhost Setup
 =============
 
 - [Install MongoDB](http://docs.mongodb.org/manual/installation/)
-- If you don't have a file 'secrets.js' at the project root, run 'cat secrets.js.sample > secrets.js' (you'll have to edit these to use Heroku)
 - Start a local MongoDB server by running `mongod`
 - Start a local node server by running `node app.js` from inside the project root
 

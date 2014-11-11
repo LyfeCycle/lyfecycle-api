@@ -1,8 +1,4 @@
-var mongo = require('mongodb');
-var express = require('express');
-var monk = require('monk');
 var async = require('async');
-var cool = require('cool-ascii-faces');
 
 // setup
 
