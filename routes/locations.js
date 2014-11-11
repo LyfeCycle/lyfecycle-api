@@ -1,4 +1,4 @@
-var database = require('../database')
+var database = require('../database');
 var mongo = require('mongodb');
 
 var BSON = mongo.BSONPure;
