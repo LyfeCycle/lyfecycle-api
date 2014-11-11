@@ -13,6 +13,7 @@ async.series([setupDatabase, setupApp, listen], ready);
 function setupDatabase(callback) {
   console.log('setupDatabase');
 	context.db = require('./database');
+  console.log('context.db: ' + context.db);
 	context.db.init(context, callback);
 }
 

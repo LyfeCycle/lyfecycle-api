@@ -6,17 +6,16 @@ var database = require('./database');
 
 var app = new express();
 var context;
-var db;
 
 module.exports.init = function(context, callback) {
-	this.context = context;
+	module.context = context;
 	app.use(express.static(__dirname + '/public'));
 	callback(null);
 }
 
 module.exports.listen = function(portNum) {
 	app.listen(portNum);
-	console.log("Now listening on port: " + this.context.settings.portNum);
+	console.log("Now listening on port: " + module.context.settings.portNum);
 }
 
 // routes
@@ -25,10 +24,8 @@ app.get('/', function(req, res){
 	res.send('info at: https://github.com/LyfeCycle/lyfecycle-api');
 });
 app.get('/locations', function(req, res){
-	database.allLocations(res, req);
+	module.context.db.allLocations(res, req);
 });
-
-
 
 
 // // routes 
