@@ -1,8 +1,9 @@
 var database = require('../database');
+var app = require('../app');
 var mongo = require('mongodb');
 
 var BSON = mongo.BSONPure;
-var db = database.db(); 
+var db = require('monk')('localhost/locationsdb')
 
 // routes
 
@@ -17,9 +18,15 @@ exports.findById = function(req, res) {
 };
  
 exports.findAll = function(req, res) {
-    db.collection('locations', function(err, collection) {
-        collection.find().toArray(function(err, items) {
-            res.send(items);
+    collection = req.db.get('locations');
+    // collection.find({},{},function()).toArray(function(err, items) {
+    //     res.send(items);
+    // });
+collection.find({},{},function(e,docs){
+        res.render('userlist', {
+            "userlist" : docs
+        }).toArray(function(err, locations) {
+            res.send(locations);
         });
     });
 };

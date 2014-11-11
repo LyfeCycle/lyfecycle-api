@@ -13,6 +13,19 @@ var portNum = 3000;
 app.set('port', (process.env.PORT || 5000));
 app.use(morgan('combined'));
 
+// setup database
+
+var mongo = require('mongodb');
+var monk = require('monk');
+var port = (process.env.MONGOLAB_URI || 'localhost');
+var db = monk(port + ':3000/locationsdb');
+
+// Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
 // location routes
 
 app.get('/locations', locations.findAll);
