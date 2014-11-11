@@ -25,12 +25,6 @@ module.exports.allLocations = function(req, res) {
 
 module.exports.reset = function(req, res) {
  locations.remove({});
- count = locations.count;
- if (count == 0) {
-    console.log('All locations removed!');
- } else {
-    console.log('There are ' + count + ' locations');
- }
  res.send('Reset locations!');
 }
 
@@ -40,7 +34,7 @@ module.exports.addLocation = function(req, res) {
     console.log('Invalid location!');
     res.json('Invalid location!');
   } else {
-    newLocation = {}
+    newLocation = {"name":json.name, "latitude":json.latitude, "longitude":json.longitude};
     locations.insert(newLocation, function(err, doc){
         console.log('Trying to add a location...');
         if(err) {
