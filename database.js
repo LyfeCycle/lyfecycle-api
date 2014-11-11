@@ -8,8 +8,8 @@ var context;
 
 module.exports.init = function(context, callback) {
     module.context = context;
-    console.log('Connecting to mongo at: ' + context.settings.mongoURI + 'locations');
-    db = monk(context.settings.mongoURI + 'locations');
+    console.log('Connecting to mongo at: ' + context.settings.mongoURI);
+    db = monk(context.settings.mongoURI);
     locations = db.get('locations');
     callback(null);
 }
