@@ -11,7 +11,7 @@ var server = new Server(mongoURL, mongoPort, {auto_reconnect: true});
 db = new Db('locationdb', server, {safe: true});
  
 db.open(function(err, db) {
-	console.log('Opening db');
+	console.log('Opening db at url: ' + mongoURL);
     if(!err) {
         console.log("Connected to 'locationdb' database");
         db.collection('locations', {safe:true}, function(err, collection) {
