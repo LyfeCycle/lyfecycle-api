@@ -1,40 +1,39 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cool = require('cool-ascii-faces');
-var locations = require('./routes/locations');
+var database = require('./database');
 
-// config
-var app = express();
+var app = new express();
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 
-if (app.get('env')) {
-	app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
+var context;
+
+module.exports.init = function(context, callback) {
+	module.context = context;
+	callback(null);
 }
 
-var portNum = 3000;
-app.set('port', (process.env.PORT || 5000))
+module.exports.listen = function(portNum) {
+	app.listen(portNum);
+	console.log("Now listening on port: " + module.context.settings.portNum);
+}
 
-// location routes
+// routes
 
-app.get('/locations', locations.findAll);
-app.get('/locations/:id', locations.findById);
-app.post('/locations', locations.addLocation);
-app.put('/locations/:id', locations.updateLocation);
-app.delete('/locations/:id', locations.deleteLocation);
-app.post('/locations/reset', locations.resetDB);
+app.get('/', function(req, res){
+	res.json('info at: https://github.com/LyfeCycle/lyfecycle-api');
+});
 
-// other routes
+app.get('/locations', function(req, res){
+	module.context.db.allLocations(req, res);
+});
 
-app.get('/', function(req, res) {
+app.post('/locations', function(req, res){
+	module.context.db.addLocation(req, res);
+});
+
+app.get('/face', function(req, res) {
   res.send(cool());
 });
-
-app.get('/port', function(req, res) {
-    res.send('Listening on port ' + portNum);
-});
-
-// server start
-
-app.listen(portNum);
-console.log('Listening on port ' + portNum);

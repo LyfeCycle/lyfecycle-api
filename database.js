@@ -1,29 +1,40 @@
 var mongo = require('mongodb');
-var Server = mongo.Server;
-var Db = mongo.Db;
-var BSON = mongo.BSONPure;
+var monk = require('monk');
 
-var mongoPort = 27017;
+var context;
+var locations;
 
-var server = new Server('127.0.0.1', mongoPort, {auto_reconnect: true});
-db = new Db('locationdb', server);
- 
-db.open(function(err, db) {
-	console.log('Opening db');
-    if(!err) {
-        console.log("Connected to 'locationdb' database");
-        db.collection('locations', {strict:true}, function(err, collection) {
-            if (err) {
-                console.log("The 'locations' collection doesn't exist. Creating it with sample data...");
-                populateDB();
-            }
-        });
-    } else if (err) {
-    	console.log(err);
-    	console.log('Is there a MongoDB server running?');
+module.exports.init = function(context, callback) {
+    module.context = context;
+    console.log('Connecting to mongo at: ' + context.settings.mongoURI);
+    db = monk(context.settings.mongoURI);
+    locations = db.get('locations');
+    if (!locations) {
+        console.log('Locations database does not exist!');
     }
-});
+    callback(null);
+}
 
-exports.db = function() {
-	return db;
+module.exports.allLocations = function(req, res) {
+    locations.find({}, function (err, docs){
+        res.json(docs);
+    });
+}
+
+module.exports.addLocation = function(req, res) {
+  newLocation = req.body;
+  if (!newLocation) {
+    res.json('Request body was empty!');
+  } else {
+    locations.insert(newLocation, function(err, doc){
+        console.log('Trying to add a location...');
+        if(err) {
+            console.log(err);
+            res.json(err);
+        } else {
+            console.log('Success!');
+            res.json('Success!');
+        }
+    });
+  }
 }
