@@ -5,7 +5,10 @@ var cool = require('cool-ascii-faces');
 var db =  monk('localhost:27017/test');
 var app = new express();
 
+var portNum = process.env.PORT || 3000;
+
 // setup database
+
 var mongoURI = (process.env.MONGOLAB_URI || 'localhost');
 var mongoPort = 27017;
 var db =  monk(mongoURI + ':' + mongoPort + 'test');
@@ -60,6 +63,6 @@ function addProduct (req, res) {
   });
 }
 
-app.listen(3000)
+app.listen(portNum);
 
 // location routes
