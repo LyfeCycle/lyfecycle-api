@@ -74,13 +74,13 @@ exports.deleteLocation = function(req, res) {
 
 exports.resetDB = function(req, res) {
 	console.log('Repopulating database');
-	populateDB();
+	this.populateDB();
 	res.send('Database repopulated!');
 }
 
 // functions
 
-var populateDB = function() {
+exports.populateDB = function() {
     var locations = [
     {
         name: "Place 1",
