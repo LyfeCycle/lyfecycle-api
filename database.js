@@ -33,7 +33,7 @@ module.exports.addLocation = function(req, res) {
     json = req.body;
   if (!valid(locationSchema, json)) {
     console.log('Invalid location!');
-    res.json('Invalid location!');
+    res.json(allgood.problems(locationSchema, json));
   } else {
     newLocation = {"name":json.name, "latitude":json.latitude, "longitude":json.longitude};
     locations.insert(newLocation, function(err, doc){

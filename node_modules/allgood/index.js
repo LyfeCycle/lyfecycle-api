@@ -8,10 +8,24 @@ module.exports = {
 	 	} else {
 	 		return false
 	 	}
+	},
+
+	problems: function(schema, json) {
+		var missing = missingKeys(schema, json);
+		var incorrect = incorrectKeyValues(schema, json);
+		var message = [];
+		if (missing.length > 0) {
+			message.push("Missing keys: [" + missing.join(", ") + ']');
+		}
+		if (incorrect.length > 0) {
+			message.push("Incorrect values for keys: [" + incorrect.join(", ") + ']');
+		}
+		return message.join(", ");
 	}
 };
 
-// loop through an array of keys, return false if any of them don't exist
+// return false as soon as an incorrect value is found
+
 function allKeysPresent(schema, json) {
 	var anyMissing = Object.keys(schema).some(function(key) {
 		return !json.hasOwnProperty(key);
@@ -24,4 +38,28 @@ function allCorrectKeyValues(schema, json) {
 		return !(typeof(json[key]) == schema[key]);
 	});
 	return !anyWrongTypes;
+}
+
+// slower functions to return an array of errors
+
+function missingKeys(schema, json) {
+	missing = [];
+	var keys = Object.keys(schema);
+	for (var i=0; i < keys.length; i++) {
+		if (!json.hasOwnProperty(keys[i])) {
+			missing.push(keys[i]);
+		}
+	}
+	return missing;
+}
+
+function incorrectKeyValues(schema, json) {
+	incorrect = [];
+	var keys = Object.keys(schema);
+	for (var i=0; i < keys.length; i++) {
+		if (!(typeof(json[keys[i]]) == schema[keys[i]])) {
+			incorrect.push(keys[i]);
+		}
+	}
+	return incorrect;
 }

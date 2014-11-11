@@ -1,6 +1,9 @@
 var should = require('chai').should(),
-    scapegoat = require('../index'),
-    valid = scapegoat.valid;
+    allgood = require('../index'),
+    valid = allgood.valid,
+    problems = allgood.problems;
+
+// valid
 
 describe('#validate', function() {
   it('validates Harry Potter', function() {
@@ -37,5 +40,15 @@ describe('#validate', function() {
     var schema = {};
     var json = {name:123};
     valid(schema, json).should.equal(true);
+  });
+});
+
+// problems
+
+describe('#problems', function() {
+  it('shows problems for simple model', function() {
+    var personSchema = {"name":"string", "age":"number"};
+    var newPerson = {"age":"11"};
+    (problems(personSchema, newPerson).length).should.be.above(1);
   });
 });
