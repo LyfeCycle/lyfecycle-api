@@ -5,7 +5,7 @@ var Db = mongo.Db;
 var BSON = mongo.BSONPure;
 
 var mongoPort = 27017;
-var mongoURL = (process.env.MONGOLAB_URI || 'localhost');
+var mongoURI = (process.env.MONGOLAB_URI || 'localhost');
 
 var server = new Server(mongoURL, mongoPort, {auto_reconnect: true});
 db = new Db('locationdb', server, {safe: true});
@@ -14,8 +14,8 @@ db.open(function(err, db) {
 	console.log('Opening db at url: ' + mongoURL);
     if(!err) {
         console.log("Connected to 'locationdb' database");
-        db.collection('locations', {safe:true}, function(err, collection) {
-            if (err) {
+        db.collection('locations', {safe:true}, function(err2, collection) {
+            if (err2) {
                 console.log("The 'locations' collection doesn't exist. Creating it with sample data...");
                 locations.populateDB();
             }
