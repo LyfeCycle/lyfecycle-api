@@ -8,10 +8,6 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 
-if (app.get('env')) {
-	app.use(express.logger('dev'));     /* 'default', 'short', 'tiny', 'dev' */
-}
-
 var portNum = 3000;
 app.set('port', (process.env.PORT || 5000))
 
