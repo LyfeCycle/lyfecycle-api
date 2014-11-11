@@ -8,7 +8,7 @@ var mongoPort = 27017;
 var mongoURI = (process.env.MONGOLAB_URI || 'localhost');
 
 var server = new Server(mongoURI, mongoPort, {auto_reconnect: true});
-db = new Db('locationdb', server, {safe: true});
+db = new mongo.Db('locationdb', server, {safe: true});
  
 db.open(function(err, db) {
 	console.log('Opening db at url: ' + mongoURI);
