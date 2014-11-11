@@ -21,9 +21,13 @@ module.exports.allLocations = function(req, res) {
 
 module.exports.addLocation = function(req, res) {
   newLocation = req.body;
+  if (!newLocation) {
+    res.send('Could not add new location!');
+  }
   locations.insert(newLocation, function(err, doc){
      console.log('Trying to add a location...');
      if(err) {
+        console.log(err);
          return err;
      } else {
          console.log('Success: ' + doc[0]);
