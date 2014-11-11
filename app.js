@@ -1,43 +1,30 @@
+var mongo = require('mongodb');
 var express = require('express');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
+var monk = require('monk');
 var cool = require('cool-ascii-faces');
-var locations = require('./routes/locations');
-
-// config
-var app = express();
-app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
-
-var portNum = 3000;
-app.set('port', (process.env.PORT || 5000));
-app.use(morgan('combined'));
+var db =  monk('localhost:27017/test');
+var app = new express();
 
 // setup database
+var mongoURI = (process.env.MONGOLAB_URI || 'localhost');
+var mongoPort = 27017;
+var db =  monk(mongoURI + ':' + mongoPort + 'test');
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var port = (process.env.MONGOLAB_URI || 'localhost');
-var db = monk(port + ':3000/locationsdb');
+app.use(express.static(__dirname + '/public'));
 
-// Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
+// basic routes
+
+app.get('/', function(req, res){
+	res.send('info at: https://github.com/LyfeCycle/lyfecycle-api');
 });
 
-// location routes
+app.get('/database',function(req,res){
+  db.driver.admin.listDatabases(function(e,dbs){
+      res.json(dbs);
+  });
+});
 
-app.get('/locations', locations.findAll);
-app.get('/locations/:id', locations.findById);
-app.post('/locations', locations.addLocation);
-app.put('/locations/:id', locations.updateLocation);
-app.delete('/locations/:id', locations.deleteLocation);
-app.post('/locations/reset', locations.resetDB);
-
-// other routes
-
-app.get('/', function(req, res) {
+app.get('/face', function(req, res) {
   res.send(cool());
 });
 
@@ -45,7 +32,34 @@ app.get('/port', function(req, res) {
     res.send('Listening on port ' + portNum);
 });
 
-// server start
+app.post('/product', authenticateUser, validateProduct, addProduct);
 
-app.listen(portNum);
-console.log('Listening on port ' + portNum);
+// functions
+
+function authenticateUser(req,res, next) {
+  //check req.session for authentication
+  next();
+}
+
+function validateProduct (req, res, next) {
+   //validate submitted data
+   next();
+}
+
+function addProduct (req, res) {
+  products = db.get("products");
+  newProduct = {name:"hi"};
+  products.insert(newProduct, function(err, doc){
+  	console.log('Trying to add a product...');
+  	if(err) {
+  		return err;
+  	} else {
+  		console.log('Success: ' + doc[0]);
+        res.send(doc[0]);
+  	}
+  });
+}
+
+app.listen(3000)
+
+// location routes

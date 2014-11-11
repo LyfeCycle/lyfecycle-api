@@ -3,7 +3,7 @@ var app = require('../app');
 var mongo = require('mongodb');
 
 var BSON = mongo.BSONPure;
-var db = require('monk')('localhost/locationsdb')
+var db = database.locationdb;
 
 // routes
 
@@ -18,16 +18,8 @@ exports.findById = function(req, res) {
 };
  
 exports.findAll = function(req, res) {
-    collection = req.db.get('locations');
-    // collection.find({},{},function()).toArray(function(err, items) {
-    //     res.send(items);
-    // });
-collection.find({},{},function(e,docs){
-        res.render('userlist', {
-            "userlist" : docs
-        }).toArray(function(err, locations) {
-            res.send(locations);
-        });
+    db.get('locations').find({}, function (err, docs){
+        console.log(docs);
     });
 };
  
