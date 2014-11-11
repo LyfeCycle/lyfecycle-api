@@ -22,18 +22,17 @@ module.exports.allLocations = function(req, res) {
 
 module.exports.addLocation = function(req, res) {
   newLocation = req.body;
-  console.log(req.body);
   if (!newLocation) {
     res.send('request body was empty!');
+  } else {
+    locations.insert(newLocation, function(err, doc){
+        console.log('Trying to add a location...');
+        if(err) {
+            console.log(err);
+            return err;
+        } else {
+            console.log('Success!');
+        }
+    });
   }
-  locations.insert(newLocation, function(err, doc){
-     console.log('Trying to add a location...');
-     if(err) {
-        console.log(err);
-         return err;
-     } else {
-         console.log('Success: ' + doc[0]);
-        res.send(doc[0]);
-     }
-  });
 }
