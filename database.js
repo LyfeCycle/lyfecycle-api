@@ -3,7 +3,6 @@ var monk = require('monk');
 var allgood = require('allgood'),
     valid = allgood.valid;
 
-
 var context;
 var locations;
 
@@ -25,8 +24,8 @@ module.exports.allLocations = function(req, res) {
 }
 
 module.exports.reset = function(req, res) {
- locations.remove({});
- res.send('Reset locations!');
+    locations.remove({});
+    res.send('Reset locations!');
 }
 
 module.exports.addLocation = function(req, res) {

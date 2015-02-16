@@ -8,7 +8,7 @@ Localhost Setup
 
 - [Install MongoDB](http://docs.mongodb.org/manual/installation/)
 - Start a local MongoDB server by running `mongod`
-- Start a local node server by running `node app.js` from inside the project root
+- Start a local node server by running `node lyfecycle-api.js` from inside the project root
 
 Curl Requests
 =============
