@@ -23,14 +23,9 @@ Curl Requests
 
 A location is a danger point, bike rack, bus stop, etc. A location has a name, latitude, longitude, and a tag which classifies it as one of the above types of locations. 
 
-The current accepted tags are: 
-- 'busStop'
-- 'crash'
-- 'bikeRack'
-- 'dangerPoint'
+The current accepted tags are: busStop, crash, bikeRack, dangerPoint
 
-
-	curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78"}' http://127.0.0.1:3000/locations
+    curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78"}' http://127.0.0.1:3000/locations
 
 ##Users
 
