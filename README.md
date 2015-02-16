@@ -5,6 +5,7 @@ Localhost Setup
 =============
 
 - [Install MongoDB](http://docs.mongodb.org/manual/installation/)
+- Install node modules by running `npm install`
 - Start a local MongoDB server by running `mongod`
 - Start a local node server by running `node lyfecycle-api.js` from inside the project root
 
