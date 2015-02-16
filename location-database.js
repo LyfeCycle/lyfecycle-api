@@ -41,10 +41,8 @@ module.exports.addLocation = function(req, res) {
   } else {
 
     // check that the tag is valid
-    if (!(validLocationTags.indexOf(newLocation.tag) >= 0)) {
-        console.log(newLocation.tag);
-        console.log(validLocationTags);
-        res.json(newLocation.tag + " is not a valid tag: " + validLocationTags); 
+    if (!(validLocationTags.indexOf(json.tag) >= 0)) {
+        res.json(json.tag + " is not a valid tag, must be one of " + validLocationTags); 
         return;
     }
 

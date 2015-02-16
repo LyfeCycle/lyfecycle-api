@@ -14,10 +14,10 @@ Curl Requests
 ##Locations
 
 ####List all locations:
-	curl -i -X GET http://127.0.0.1:3000/all-locations
+	curl -i -X GET http://127.0.0.1:3000/locations
 
 ####Get location by _id:
-	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations/id
 
 ####Add a new location:
 
@@ -30,7 +30,7 @@ The current accepted tags are: busStop, crash, bikeRack, dangerPoint
 ##Users
 
 ####List all users:
-	curl -i -X GET http://127.0.0.1:3000/users
+	curl -i -X GET http://127.0.0.1:3000/all-users
 
 ####Get user by _id:
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users

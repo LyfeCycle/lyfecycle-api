@@ -27,11 +27,11 @@ app.get('/', function(req, res){
 	res.json('info at: https://github.com/LyfeCycle/lyfecycle-api');
 });
 
-app.get('/all-locations', function(req, res){
+app.get('/locations', function(req, res){
 	module.context.locationDb.allLocations(req, res);
 });
 
-app.get('/locations', function(req, res){
+app.get('/locations/id', function(req, res){
 	module.context.locationDb.findLocation(req, res);
 });
 
