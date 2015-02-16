@@ -44,6 +44,6 @@ Create a new user with a name, and a home latitude and longitude. These coordina
 
 ####Change a user's mileage
 
-This is used to keep track of how many miles a user has ridden. the `miles` parameter can be positive or negative.
+Update how many miles a user has ridden. The `miles` parameter can be positive or negative.
 
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"userId": "123", "miles": "100.25}' http://127.0.0.1:3000/users/change-mileage
