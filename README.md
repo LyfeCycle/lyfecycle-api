@@ -26,7 +26,7 @@ A location is a danger point, bike rack, bus stop, etc. A location has a name, l
 
 The current accepted tags are: busStop, crash, bikeRack, dangerPoint
 
-    curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78"}' http://127.0.0.1:3000/locations
+    curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78", "tag":"crash"}' http://127.0.0.1:3000/locations
 
 ##Users
 
