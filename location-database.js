@@ -39,11 +39,22 @@ module.exports.addLocation = function(req, res) {
     console.log('Invalid location!');
     res.json(allgood.problems(locationSchema, json));
   } else {
+
+    // check that the tag is valid
+    if (!(validLocationTags.indexOf(newLocation.tag) >= 0)) {
+        console.log(newLocation.tag);
+        console.log(validLocationTags);
+        res.json(newLocation.tag + " is not a valid tag: " + validLocationTags); 
+        return;
+    }
+
     newLocation = {
         "name":json.name,
         "latitude":json.latitude,
-        "longitude":json.longitude
+        "longitude":json.longitude,
+        "tag":json.tag
     };
+
     locations.insert(newLocation, function(err, doc){
         console.log('Trying to add a location...');
         if(err) {
@@ -61,5 +72,8 @@ module.exports.addLocation = function(req, res) {
 var locationSchema = {
     "name":"string",
     "latitude":"string",
-    "longitude":"string"
+    "longitude":"string",
+    "tag":"string"
 };
+
+var validLocationTags = ['busStop', 'crash', 'bikeRack', 'dangerPoint'];

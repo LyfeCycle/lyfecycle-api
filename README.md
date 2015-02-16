@@ -1,8 +1,6 @@
 Lyfecycle's API
 =============
 
-Currently: get/post/put location data
-
 Localhost Setup
 =============
 
@@ -22,6 +20,11 @@ Curl Requests
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations
 
 ####Add a new location:
+
+A location is a danger point, bike rack, bus stop, etc. A location has a name, latitude, longitude, and a tag which classifies it as one of the above types of locations. 
+
+The current accepted tags are: ['busStop', 'crash', 'bikeRack', 'dangerPoint']
+
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78"}' http://127.0.0.1:3000/locations
 
 ##Users
@@ -33,7 +36,13 @@ Curl Requests
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users
 
 ####Add a new user:
+
+Create a new user with a name, and a home latitude and longitude. These coordinates will be used to determine local leaderboards. A user is also initialized with a counter for how many miles they've ridden.
+
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New User", "homeLatitude": "12.34", "homeLongitude": "56.78"}' http://127.0.0.1:3000/users
 
 ####Change a user's mileage
+
+This is used to keep track of how many miles a user has ridden. the `miles` parameter can be positive or negative.
+
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"userId": "123", "miles": "100.25}' http://127.0.0.1:3000/users/change-mileage
