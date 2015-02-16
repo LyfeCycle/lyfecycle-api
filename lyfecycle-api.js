@@ -4,11 +4,13 @@ var async = require('async');
 
 var context = {};
 context.settings = require('./settings');
-async.series([setupDatabase, setupApp, listen], ready); // do these things in order!
+async.series([setupDatabases, setupApp, listen], ready); // do these things in order!
 
-function setupDatabase(callback) {
-	context.db = require('./database');
-	context.db.init(context, callback);
+function setupDatabases(callback) {
+	context.locationDb = require('./location-database');
+	context.locationDb.init(context, callback);
+  context.userDb = require('./user-database');
+  context.userDb.init(context, callback);
 }
 
 function setupApp(callback) {

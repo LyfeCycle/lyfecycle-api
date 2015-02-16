@@ -3,22 +3,27 @@ var monk = require('monk');
 var allgood = require('allgood'),
     valid = allgood.valid;
 
-var context;
-var locations;
-
 module.exports.init = function(context, callback) {
     module.context = context;
     console.log('Connecting to mongo at: ' + context.settings.mongoURI);
     db = monk(context.settings.mongoURI);
-    locations = db.get('locations');
+    locations = db.get('locations'); // locations is a collection
     if (!locations) {
         console.log('Locations database does not exist!');
+    } else {
+        console.log('Found the locations database');
     }
     callback(null);
 }
 
 module.exports.allLocations = function(req, res) {
     locations.find({}, function (err, docs){
+        res.json(docs);
+    });
+}
+
+module.exports.findLocation = function(req, res) {
+    locations.find({_id : req.body.locationId}, function (err, docs){
         res.json(docs);
     });
 }
@@ -34,7 +39,11 @@ module.exports.addLocation = function(req, res) {
     console.log('Invalid location!');
     res.json(allgood.problems(locationSchema, json));
   } else {
-    newLocation = {"name":json.name, "latitude":json.latitude, "longitude":json.longitude};
+    newLocation = {
+        "name":json.name,
+        "latitude":json.latitude,
+        "longitude":json.longitude
+    };
     locations.insert(newLocation, function(err, doc){
         console.log('Trying to add a location...');
         if(err) {
