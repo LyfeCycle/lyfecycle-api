@@ -31,7 +31,7 @@ The current accepted tags are: busStop, crash, bikeRack, dangerPoint
 ##Users
 
 ####List all users:
-	curl -i -X GET http://127.0.0.1:3000/all-users
+	curl -i -X GET http://127.0.0.1:3000/users
 
 ####Get user by _id:
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users
