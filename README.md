@@ -14,12 +14,6 @@ Curl Requests
 
 ##Locations
 
-####List all locations:
-	curl -i -X GET http://127.0.0.1:3000/locations
-
-####Get location by _id:
-	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations/id
-
 ####Add a new location:
 
 A location is a danger point, bike rack, bus stop, etc. A location has a name, latitude, longitude, and a tag which classifies it as one of the above types of locations. 
@@ -27,6 +21,12 @@ A location is a danger point, bike rack, bus stop, etc. A location has a name, l
 The current accepted tags are: busStop, crash, bikeRack, dangerPoint
 
     curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78", "tag": "crash"}' http://127.0.0.1:3000/locations
+
+####List all locations:
+	curl -i -X GET http://127.0.0.1:3000/locations
+
+####Get location by _id:
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations/id
 
 ####Get locations by tag
 
@@ -36,17 +36,17 @@ Look up all locations with a desired tag.
 
 ##Users
 
-####List all users:
-	curl -i -X GET http://127.0.0.1:3000/users
-
-####Get user by _id:
-	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users
-
 ####Add a new user:
 
 Create a new user with a name, and a home latitude and longitude. These coordinates will be used to determine local leaderboards. A user is also initialized with a counter for how many miles they've ridden.
 
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New User", "homeLatitude": "12.34", "homeLongitude": "56.78"}' http://127.0.0.1:3000/users
+
+####List all users:
+	curl -i -X GET http://127.0.0.1:3000/users
+
+####Get user by _id:
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users
 
 ####Change a user's mileage
 
