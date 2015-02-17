@@ -35,6 +35,10 @@ app.get('/locations/id', function(req, res){
 	module.context.locationDb.findLocation(req, res);
 });
 
+app.get('/locations/tagged', function(req, res){
+	module.context.locationDb.locationsByTag(req, res);
+});
+
 app.post('/locations', function(req, res){
 	module.context.locationDb.addLocation(req, res);
 });

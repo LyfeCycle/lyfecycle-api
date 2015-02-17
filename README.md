@@ -26,7 +26,13 @@ A location is a danger point, bike rack, bus stop, etc. A location has a name, l
 
 The current accepted tags are: busStop, crash, bikeRack, dangerPoint
 
-    curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78", "tag":"crash"}' http://127.0.0.1:3000/locations
+    curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New Location", "latitude": "12.34", "longitude": "56.78", "tag": "crash"}' http://127.0.0.1:3000/locations
+
+####Get locations by tag
+
+Look up all locations with a desired tag.
+
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"tag": "crash"}' http://127.0.0.1:3000/locations/tagged
 
 ##Users
 
@@ -44,6 +50,6 @@ Create a new user with a name, and a home latitude and longitude. These coordina
 
 ####Change a user's mileage
 
-Update how many miles a user has ridden. The `miles` parameter can be positive or negative.
+Increment how many miles a user has ridden. The `miles` parameter can be positive or negative and is added to the user's current mileage count.
 
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"userId": "123", "miles": "100.25}' http://127.0.0.1:3000/users/change-mileage

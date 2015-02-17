@@ -28,6 +28,12 @@ module.exports.findLocation = function(req, res) {
     });
 }
 
+module.exports.locationsByTag = function(req, res) {
+    locations.find({tag : req.body.tag}, function (err, docs){
+        res.json(docs);
+    });
+}
+
 module.exports.reset = function(req, res) {
     locations.remove({});
     res.send('Reset locations!');
