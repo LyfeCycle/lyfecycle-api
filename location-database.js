@@ -80,4 +80,4 @@ var locationSchema = {
     "tag":"string"
 };
 
-var validLocationTags = ['busStop', 'crash', 'bikeRack', 'dangerPoint', 'dooring'];
+var validLocationTags = ['busStop', 'crash', 'bikeRack', 'dangerPoint', 'dooring', 'traffic', 'trafficAccident', 'construction', 'blockedBikeLane'];
