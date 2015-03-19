@@ -72,6 +72,11 @@ module.exports.addLocation = function(req, res) {
   }
 }
 
+module.exports.getDirections = function(req, res) {
+    directions = context.directionsHelper.getDirections(req.body.startLat, req.body.startLong, req.body.destination);
+    res.json(directions);
+}
+
 // define the keys we want all locations to have
 var locationSchema = {
     "name":"string",
