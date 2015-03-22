@@ -14,6 +14,12 @@ Curl Requests
 
 ##Locations
 
+####Getting directions:
+
+Pass a startLat (starting latitude), startLong (starting longitude), and destination (as a string)
+
+	curl -i -X GET http://127.0.0.1:3000/locations/directions
+
 ####Add a new location:
 
 A location is a danger point, bike rack, bus stop, etc. A location has a name, latitude, longitude, and a tag which classifies it as one of the above types of locations. 
