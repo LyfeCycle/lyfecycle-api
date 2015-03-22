@@ -8,7 +8,7 @@ Localhost Setup
 - Install node modules by running `npm install`
 - Start a local MongoDB server by running `mongod`
 - Save a copy of vars.env.example as vars.env and set your config variables
-- Start a local node server by running `node lyfecycle-api.js` from inside the project root
+- Start a local node server by running `foreman start` from inside the project root
 
 Curl Requests
 =============
