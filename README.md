@@ -7,6 +7,7 @@ Localhost Setup
 - [Install MongoDB](http://docs.mongodb.org/manual/installation/)
 - Install node modules by running `npm install`
 - Start a local MongoDB server by running `mongod`
+- Save a copy of secrets-example.js as secrets.js and set the credentials
 - Start a local node server by running `node lyfecycle-api.js` from inside the project root
 
 Curl Requests
