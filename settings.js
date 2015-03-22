@@ -1,9 +1,7 @@
-secrets = require('./secrets.js')
-
 module.exports.portNum = process.env.PORT || 3000;
 module.exports.mongoPort = 27017;
 module.exports.mongoURI = (process.env.MONGOLAB_URI ? ('mongodb://' + process.env.DB_USERNAME + ':' + process.env.DB_PASSWORD + '@ds051630.mongolab.com:51630/heroku_app31452963') :  ('localhost:' + module.exports.mongoPort + '/lyfecycle'));
 // google API
-googleKey = process.env.PORT || secrets.GOOGLE_KEY
+googleKey = process.env.GOOGLE_KEY
 module.exports.googleDirectionsStartReq = 'https://maps.googleapis.com/maps/api/directions';
 module.exports.googleDirectionsEndReq = '&key=' + googleKey + '&avoid=highways&mode=bicycling&sensor=false';
