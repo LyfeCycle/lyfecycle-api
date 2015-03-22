@@ -21,7 +21,7 @@ module.exports.listen = function(portNum) {
 
 // routes
 
-// 		locations
+// locations
 
 app.get('/', function(req, res){
 	res.json('info at: https://github.com/LyfeCycle/lyfecycle-api');

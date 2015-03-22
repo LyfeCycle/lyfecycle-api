@@ -8,7 +8,7 @@ async.series([setupDatabases, setupApp, listen], ready); // do these things in o
 
 function setupDatabases(callback) {
   context.directionsHelper = require('./directions-helper');
-  context.directionsHelper.init(context);
+  context.directionsHelper.init(context, callback);
 	context.locationDb = require('./location-database');
 	context.locationDb.init(context, callback);
   context.userDb = require('./user-database');
