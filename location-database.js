@@ -7,8 +7,8 @@ module.exports.init = function(context, callback) {
     module.context = context;
     console.log('Connecting to mongo at: ' + context.settings.mongoURI);
     db = monk(context.settings.mongoURI);
-    locations = db.get('locations'); // locations is a collection
-    if (!locations) {
+    module.context.locations = db.get('locations'); // locations is a collection
+    if (!module.context.locations) {
         console.log('Locations database does not exist!');
     } else {
         console.log('Found the locations database');
@@ -17,25 +17,25 @@ module.exports.init = function(context, callback) {
 }
 
 module.exports.allLocations = function(req, res) {
-    locations.find({}, function (err, docs){
+    module.context.locations.find({}, function (err, docs){
         res.json(docs);
     });
 }
 
 module.exports.findLocation = function(req, res) {
-    locations.find({_id : req.body.locationId}, function (err, docs){
+    module.context.locations.find({_id : req.body.locationId}, function (err, docs){
         res.json(docs);
     });
 }
 
 module.exports.locationsByTag = function(req, res) {
-    locations.find({tag : req.body.tag}, function (err, docs){
+    module.context.locations.find({tag : req.body.tag}, function (err, docs){
         res.json(docs);
     });
 }
 
 module.exports.reset = function(req, res) {
-    locations.remove({});
+    module.context.locations.remove({});
     res.send('Reset locations!');
 }
 
@@ -73,8 +73,9 @@ module.exports.addLocation = function(req, res) {
 }
 
 module.exports.getDirections = function(req, res) {
-    directions = context.directionsHelper.getDirections(req.body.startLat, req.body.startLong, req.body.destination);
-    res.json(directions);
+    directions = module.context.directionsHelper.getDirections(req.body.startLat, req.body.startLong, req.body.destination, function(directions) {
+        res.json(directions.routes);
+    });
 }
 
 // define the keys we want all locations to have

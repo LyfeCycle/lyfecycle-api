@@ -7,7 +7,7 @@ Localhost Setup
 - [Install MongoDB](http://docs.mongodb.org/manual/installation/)
 - Install node modules by running `npm install`
 - Start a local MongoDB server by running `mongod`
-- Save a copy of vars.env.example as vars.env and set your config variables
+- Save a copy of .env.example as .env and set your config variables
 - Start a local node server by running `foreman start` from inside the project root
 
 Curl Requests

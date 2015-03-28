@@ -1,4 +1,4 @@
-var http = require('http');
+var request = require('request');
 
 module.exports.init = function(context, callback) {
     module.context = context;
@@ -6,39 +6,36 @@ module.exports.init = function(context, callback) {
 }
 
 // helper function to get directions
-module.exports.getDirections = function(startLat, startLong, destination) {
+module.exports.getDirections = function(startLat, startLong, destination, callback) {
 	var directions; // the json obj we'll eventuall return
-
 	// build the url for our http request
 	requestPath = "origin="
 				+ startLat + ',' 
 				+ startLong 
 				+ '&destination=' 
 				+ destination 
-				+ context.settings.googleDirectionsEndReq;
+				+ module.context.settings.googleDirectionsEndReq;
+	requestURL = module.context.settings.googleDirectionsStartReq+'/json?' + requestPath;
 
-	var options = {
-	  host: context.settings.googleDirectionsStartReq,
-	  path: '/json?' + requestPath
-	};
-
-	buildDirectionsObj = function(response) {
-	  var str = '';
-
-	  response.on('data', function (chunk) {
-	    str += chunk; // build the string with each chunk of data we get back
-	  });
-
-	  response.on('end', function () {
-	    var json = JSON.parse(str);
-	    directions = json;
-	    console.log(json);
-	  });
-	}
-
-	var req = http.request(options, buildDirectionsObj);
-	req.end();
-
-	return directions;
+	request(requestURL, function (error, response, body) {
+	  if (!error && response.statusCode == 200) {
+	    directions = JSON.parse(body);
+	    // loop through json, enter an example warning for each route
+	    directions.routes.forEach(function(route) {
+	    	route.legs.forEach(function(leg) {
+	    		leg.steps.forEach(function(step) {
+	    			step.alerts = { name: 'Boston Crash Point',
+									latitude: '42.3565195',
+									longitude: '-71.13808',
+									tag: 'crash',
+									_id: '54ea271e41a519295e000028' }
+	    		});
+	    	});
+	    });
+	  } else {
+	  	directions = error;
+	  }
+	  callback(directions);
+	});
 }
 
