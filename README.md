@@ -21,6 +21,8 @@ Pass a startLat (starting latitude), startLong (starting longitude), and destina
 
 	curl -i -X GET http://127.0.0.1:3000/locations/directions
 
+This contains Google's API return. Each route.leg.step of the return contains a key/value pair `alerts`, which contains any corresponding danger points.
+
 ####Add a new location:
 
 A location is a danger point, bike rack, bus stop, etc. A location has a name, latitude, longitude, and a tag which classifies it as one of the above types of locations. 
