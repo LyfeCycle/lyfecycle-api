@@ -47,7 +47,7 @@ Look up all locations with a desired tag.
 
 ####Add a new user:
 
-Create a new user with a name, and a home latitude and longitude. These coordinates will be used to determine local leaderboards. A user is also initialized with a counter for how many miles they've ridden.
+Create a new user with a name, a unique Facebook ID string, and a neighborhood like 'Fenway' or 'Allston'. A user is also initialized with a counter for how many miles they've ridden.
 
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New User", "homeLatitude": "12.34", "homeLongitude": "56.78"}' http://127.0.0.1:3000/users
 
@@ -56,6 +56,9 @@ Create a new user with a name, and a home latitude and longitude. These coordina
 
 ####Get user by _id:
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users
+
+####Get user by Facebook ID:
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"facebookId" : "abc123"}' http://127.0.0.1:3000/users
 
 ####Change a user's mileage
 

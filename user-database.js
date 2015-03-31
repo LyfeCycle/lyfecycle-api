@@ -23,7 +23,19 @@ module.exports.allUsers = function(req, res) {
 }
 
 module.exports.findUser = function(req, res) {
-    users.find({_id : req.body.userId}, function (err, docs){
+    if ("facebookId" in req.body) {
+        users.find({facebookId : req.body.facebookId}, function (err, docs){
+            res.json(docs);
+        });
+    } else {
+        users.find({_id : req.body.userId}, function (err, docs){
+            res.json(docs);
+        });
+    }
+}
+
+module.exports.findUserByFacebook = function(req, res) {
+    users.find({facebookId : req.body.facebookId}, function (err, docs){
         res.json(docs);
     });
 }
@@ -58,8 +70,8 @@ module.exports.addUser = function(req, res) {
   } else {
     newUser = {
     	"name":json.name, 
-		"homeLatitude":json.homeLatitude,
-		"homeLongitude":json.homeLongitude,
+		"facebookId":json.facebookId,
+		"neighborhoodName":json.neighborhoodName,
 		"milesRidden":0 // init this, not supplied in json
     	};
     users.insert(newUser, function(err, doc){
@@ -78,6 +90,6 @@ module.exports.addUser = function(req, res) {
 // define the keys we want all users to have
 var userSchema = {
     "name":"string",
-    "homeLatitude":"string", // use home location to determine location-specific leaderboards
-    "homeLongitude":"string"
+    "facebookId" : "string",
+    "neighborhoodName" : "string"
 };
