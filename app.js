@@ -51,7 +51,7 @@ app.post('/locations/reset', function(req, res){
 	module.context.locationDb.reset(req, res);
 });
 
-// 		users
+// users
 
 app.get('/users', function(req, res){
 	module.context.userDb.allUsers(req, res);

@@ -59,7 +59,9 @@ Create a new user with a name, a unique Facebook ID string, and a neighborhood l
 
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"userId" : "123"}' http://127.0.0.1:3000/users/find
 
-####Get user by Facebook ID (same endpoint as finding by _id, but pass a different parameter):
+####Get user by Facebook ID:
+
+Same endpoint as finding by _id, but pass a different parameter
 
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"facebookId" : "abc123"}' http://127.0.0.1:3000/users/find
 
