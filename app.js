@@ -57,6 +57,10 @@ app.get('/users', function(req, res){
 	module.context.userDb.allUsers(req, res);
 });
 
+app.get('/users/find', function(req, res){
+	module.context.userDb.findUser(req, res);
+});
+
 app.post('/users', function(req, res){
 	module.context.userDb.addUser(req, res);
 });
