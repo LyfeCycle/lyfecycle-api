@@ -40,9 +40,9 @@ module.exports.reset = function(req, res) {
 }
 
 module.exports.addLocation = function(req, res) {
-  bigJson = req.body;
+  jsonArray = req.body;
  
-  for (json in bigJson) {
+  jsonArray.forEach(function(json) {
 	if (!valid(locationSchema, json)) {
 		console.log('Invalid location!');
 		res.json(allgood.problems(locationSchema, json));
@@ -71,7 +71,7 @@ module.exports.addLocation = function(req, res) {
 			}
 		});
 	}
-  }
+  });
 }
 
 module.exports.getDirections = function(req, res) {
