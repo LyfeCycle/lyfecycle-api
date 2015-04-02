@@ -40,35 +40,37 @@ module.exports.reset = function(req, res) {
 }
 
 module.exports.addLocation = function(req, res) {
-    json = req.body;
-  if (!valid(locationSchema, json)) {
-    console.log('Invalid location!');
-    res.json(allgood.problems(locationSchema, json));
-  } else {
+  bigJson = req.body;
+ 
+  for (json in bigJson) {
+	if (!valid(locationSchema, json)) {
+		console.log('Invalid location!');
+		res.json(allgood.problems(locationSchema, json));
+	} else {
+		// check that the tag is valid
+		if (!(validLocationTags.indexOf(json.tag) >= 0)) {
+			res.json(json.tag + " is not a valid tag, must be one of " + validLocationTags); 
+			return;
+		}
 
-    // check that the tag is valid
-    if (!(validLocationTags.indexOf(json.tag) >= 0)) {
-        res.json(json.tag + " is not a valid tag, must be one of " + validLocationTags); 
-        return;
-    }
+		newLocation = {
+			"name":json.name,
+			"latitude":json.latitude,
+			"longitude":json.longitude,
+			"tag":json.tag
+		};
 
-    newLocation = {
-        "name":json.name,
-        "latitude":json.latitude,
-        "longitude":json.longitude,
-        "tag":json.tag
-    };
-
-    locations.insert(newLocation, function(err, doc){
-        console.log('Trying to add a location...');
-        if(err) {
-            console.log(err);
-            res.json(err);
-        } else {
-            console.log('Success!');
-            res.json('Success!');
-        }
-    });
+		locations.insert(newLocation, function(err, doc){
+			console.log('Trying to add a location...');
+			if(err) {
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('Success!');
+				res.json('Success!');
+			}
+		});
+	}
   }
 }
 
