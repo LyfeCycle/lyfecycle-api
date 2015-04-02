@@ -67,11 +67,11 @@ module.exports.addLocation = function(req, res) {
 				res.json(err);
 			} else {
 				console.log('Success!');
-				res.json('Success!');
 			}
 		});
 	}
   });
+  res.json('Success!');
 }
 
 module.exports.getDirections = function(req, res) {
