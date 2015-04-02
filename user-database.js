@@ -23,7 +23,12 @@ module.exports.allUsers = function(req, res) {
 }
 
 module.exports.findUser = function(req, res) {
-    if ("facebookId" in req.body) {
+    if ("facebookId" in req.query) {
+        users.find({facebookId : req.query.facebookId}, function (err, docs){
+            res.json(docs);
+        });
+    }
+    else if ("facebookId" in req.body) {
         users.find({facebookId : req.body.facebookId}, function (err, docs){
             res.json(docs);
         });
