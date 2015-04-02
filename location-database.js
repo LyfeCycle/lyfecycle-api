@@ -60,7 +60,7 @@ module.exports.addLocation = function(req, res) {
 			"tag":json.tag
 		};
 
-		locations.insert(newLocation, function(err, doc){
+		module.context.locations.insert(newLocation, function(err, doc){
 			console.log('Trying to add a location...');
 			if(err) {
 				console.log(err);
