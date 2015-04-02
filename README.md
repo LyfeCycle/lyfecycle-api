@@ -67,6 +67,10 @@ Same endpoint as finding by _id, but pass a different parameter
 
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"facebookId" : "abc123"}' http://127.0.0.1:3000/users/find
 
+You can also find a user by Facebook ID by passing it as a parameter in the url:
+
+	curl -i -X GET http://127.0.0.1:3000/users/find?facebookId=abc123
+
 ####Change a user's mileage
 
 Increment how many miles a user has ridden. The `miles` parameter can be positive or negative and is added to the user's current mileage count.
