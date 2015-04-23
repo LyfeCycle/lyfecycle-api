@@ -21,7 +21,7 @@ Pass a startLat (starting latitude), startLong (starting longitude), and destina
 
 	curl -i -X GET http://127.0.0.1:3000/locations/directns -d '{"startLat":"42.34", "startLong":"-70.9","destination":"kenmore"}' -H 'Content-Type: application/json'
 
-This contains Google's API return. Each route.leg.step of the return contains a key/value pair `alerts`, which contains any corresponding danger points.
+This contains Google's API return. Each route.leg.step of the return contains an array `alerts`, which contains any corresponding danger points.
 
 ####Add a new location:
 
