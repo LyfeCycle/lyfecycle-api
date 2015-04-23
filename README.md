@@ -19,7 +19,7 @@ Curl Requests
 
 Pass a startLat (starting latitude), startLong (starting longitude), and destination (as a string)
 
-	curl -i -X GET http://127.0.0.1:3000/locations/directions
+	curl -i -X GET http://127.0.0.1:3000/locations/directns -d '{"startLat":"42.34", "startLong":"-70.9","destination":"kenmore"}' -H 'Content-Type: application/json'
 
 This contains Google's API return. Each route.leg.step of the return contains a key/value pair `alerts`, which contains any corresponding danger points.
 
@@ -31,7 +31,7 @@ The current accepted tags are: 'busStop', 'crash', 'bikeRack', 'dangerPoint', 'd
 
 Takes an array of locations.
 
-    curl -i -X POST -H 'Content-Type: application/json' -d '[{"name": "New Location", "latitude": "12.34", "longitude": "56.78", "tag": "crash"}]' http://127.0.0.1:3000/locations
+    curl -i -X POST -H 'Content-Type: application/json' -d '[{"name": "New Location", "latitude": 12.34, "longitude": 56.78, "tag": "crash"}]' http://127.0.0.1:3000/locations
 
 ####List all locations:
 	curl -i -X GET http://127.0.0.1:3000/locations

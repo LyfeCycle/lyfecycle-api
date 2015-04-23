@@ -83,8 +83,8 @@ module.exports.getDirections = function(req, res) {
 // define the keys we want all locations to have
 var locationSchema = {
     "name":"string",
-    "latitude":"string",
-    "longitude":"string",
+    "latitude":"float",
+    "longitude":"float",
     "tag":"string"
 };
 
