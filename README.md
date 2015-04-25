@@ -27,7 +27,7 @@ This contains Google's API return. Each route.leg.step of the return contains an
 
 A location is a danger point, bike rack, bus stop, etc. A location has a name, latitude, longitude, and a tag which classifies it as one of the above types of locations. 
 
-The current accepted tags are: 'busStop', 'crash', 'bikeRack', 'dangerPoint', 'dooring', 'traffic', 'trafficAccident', 'construction', 'blockedBikeLane'
+The current accepted tags are: `busStop`, `crash`, `bikeRack`, `dangerPoint`, `dooring`, `traffic`, `trafficAccident`, `construction`, `blockedBikeLane`
 
 Takes an array of locations.
 
