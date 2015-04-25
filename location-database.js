@@ -22,6 +22,15 @@ module.exports.allLocations = function(req, res) {
     });
 }
 
+module.exports.locationsWithin = function(req, res) {
+    module.context.locations.find({
+        'latitude':{$gte: req.body.topLeftLat, $lte: req.body.botRightLat},
+        'longitude':{$gte: req.body.topLeftLong , $lte: req.body.botRightLong}
+    }, function (err, docs){
+        res.json(docs);
+    });
+}
+
 module.exports.findLocation = function(req, res) {
     module.context.locations.find({_id : req.body.locationId}, function (err, docs){
         res.json(docs);

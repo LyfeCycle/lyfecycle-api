@@ -76,6 +76,10 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 			  console.log('sending back directions');
 			  bigCallback(directions);
 			});
+		} else {
+			// there was an error in the request
+			console.log(error);
+			bigCallback(error);
 		}
 	});
 }

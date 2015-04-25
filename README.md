@@ -36,6 +36,12 @@ Takes an array of locations.
 ####List all locations:
 	curl -i -X GET http://127.0.0.1:3000/locations
 
+####Locations within a region:
+
+A region is a square defined by 2 opposite points. Define these two points with a `topLeftLat`, `topLeftLong`, `botRightLat`, and `botRightLong`.
+
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"topLeftLat" : 42.1, "topLeftLong" : 42.1, "botRightLat" : 42.1, "botRightLong" : 42.1}' http://127.0.0.1:3000/locations
+
 ####Get location by _id:
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations/id
 
