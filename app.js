@@ -39,6 +39,10 @@ app.get('/locations/directions', function(req, res){
 	module.context.locationDb.getDirections(req, res);
 });
 
+app.get('/locations/region', function(req, res){
+	module.context.locationDb.locationsWithin(req, res);
+});
+
 app.get('/locations/tagged', function(req, res){
 	module.context.locationDb.locationsByTag(req, res);
 });

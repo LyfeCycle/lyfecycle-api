@@ -38,9 +38,9 @@ Takes an array of locations.
 
 ####Locations within a region:
 
-A region is a square defined by 2 opposite points. Define these two points with a `topLeftLat`, `topLeftLong`, `botRightLat`, and `botRightLong`.
+A region is a square defined by the top left and bottom right points. Define these two points with a `topLeftLat`, `topLeftLong`, `botRightLat`, and `botRightLong`.
 
-	curl -i -X GET -H 'Content-Type: application/json' -d '{"topLeftLat" : 42.1, "topLeftLong" : 42.1, "botRightLat" : 42.1, "botRightLong" : 42.1}' http://127.0.0.1:3000/locations
+	curl -i -X GET -H 'Content-Type: application/json' -d '{"topLeftLat" : 42.1, "topLeftLong" : 42.1, "botRightLat" : 42.1, "botRightLong" : 42.1}' http://127.0.0.1:3000/locations/region
 
 ####Get location by _id:
 	curl -i -X GET -H 'Content-Type: application/json' -d '{"locationId" : "123"}' http://127.0.0.1:3000/locations/id
