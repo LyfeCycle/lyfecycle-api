@@ -19,7 +19,7 @@ Curl Requests
 
 Pass a startLat (starting latitude), startLong (starting longitude), and destination (as a string)
 
-	curl -i -X GET http://127.0.0.1:3000/locations/directns -d '{"startLat":"42.34", "startLong":"-70.9","destination":"kenmore"}' -H 'Content-Type: application/json'
+	curl -i -X GET http://127.0.0.1:3000/locations/directions -d '{"startLat":42.34, "startLong":-70.9,"destination":"kenmore"}' -H 'Content-Type: application/json'
 
 This contains Google's API return. Each route.leg.step of the return contains an array `alerts`, which contains any corresponding danger points.
 
