@@ -67,6 +67,11 @@ module.exports.incrementUserMileage = function(req, res) {
 	});
 }
 
+module.exports.deleteUser = function(res, res) {
+    users.remove({facebookId: req.body.facebookId});
+    res.json("deleted");
+}
+
 module.exports.addUser = function(req, res) {
     json = req.body;
   if (!valid(userSchema, json)) {

@@ -77,6 +77,10 @@ You can also find a user by Facebook ID by passing it as a parameter in the url:
 
 	curl -i -X GET http://127.0.0.1:3000/users/find?facebookId=abc123
 
+####Delete user by Facebook ID:
+
+	curl -i -X POST -H 'Content-Type: application/json' -d '{"facebookId": "ABC1234"}' http://127.0.0.1:3000/users/delete
+
 ####Change a user's mileage
 
 Increment how many miles a user has ridden. The `miles` parameter can be positive or negative and is added to the user's current mileage count.
