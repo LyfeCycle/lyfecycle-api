@@ -31,8 +31,8 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 		    // store async tasks
 			asyncTasks = [];
 			numQueries = 0; // keep track of how many we had to do
-			displacement = .01 // only recheck a point if it is this far away from the last one
-		    queryRadius = .01 // look for points within this amount of each point
+			displacement = .005 // only recheck a point if it is this far away from the last one
+		    queryRadius = .005 // look for points within this amount of each point
 		    // loop through json
 		    directions.routes.forEach(function (route) {
 		    	route.legs.forEach(function(leg) {
