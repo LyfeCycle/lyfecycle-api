@@ -24,7 +24,7 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 				+ destination 
 				+ module.context.settings.googleDirectionsEndReq;
 	requestURL = module.context.settings.googleDirectionsStartReq+'/json?' + requestPath;
-
+	console.log(requestURL);
 	request(requestURL, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 		    directions = JSON.parse(body);
@@ -43,10 +43,9 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 		    			array.forEach(function (latLongPair){ 
 						    thisLat = latLongPair[0];
 		    				thisLong = latLongPair[1];
-			    			if (lastPair==[] || (Math.abs(lastPair[0]-thisLat) > displacement && Math.abs(lastPair[1]-thisLong) > displacement)) {
+			    			if (lastPair.length==0 || (Math.abs(lastPair[0]-thisLat) > displacement && Math.abs(lastPair[1]-thisLong) > displacement)) {
 		    					numQueries += 1;
 		    					asyncTasks.push(function(callback1) {
-			    					console.log('starting a find...');
 		    						module.context.locations.find({
 			    						'latitude':{$gte: thisLat - queryRadius, $lte: thisLat + queryRadius},
 			    						'longitude':{$gte: thisLong - queryRadius, $lte: thisLong + queryRadius}
@@ -57,7 +56,6 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 				    					}
 				    					step.alerts = docs;
 				    					lastAlerts = docs; // store these for next time
-				    					console.log('finishing a find...');
 				    					callback1(); // tell async the task is done
 								    }); // end find
 			    				}); // end of push to asyncTasks
