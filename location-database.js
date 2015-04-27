@@ -23,9 +23,16 @@ module.exports.allLocations = function(req, res) {
 }
 
 module.exports.locationsWithin = function(req, res) {
+    if ("topLeftLat" in req.query) {
+        json = req.query;
+    } else if ("topLeftLat" in req.body) {
+        json = req.body;
+    } else {
+        res.json('error');
+    }
     module.context.locations.find({
-        'latitude':{$gte: req.body.topLeftLat, $lte: req.body.botRightLat},
-        'longitude':{$gte: req.body.topLeftLong , $lte: req.body.botRightLong}
+        'latitude':{$gte: json.topLeftLat, $lte: json.botRightLat},
+        'longitude':{$gte: json.topLeftLong , $lte: json.botRightLong}
     }, function (err, docs){
         res.json(docs);
     });
@@ -84,7 +91,14 @@ module.exports.addLocation = function(req, res) {
 }
 
 module.exports.getDirections = function(req, res) {
-    directions = module.context.directionsHelper.getDirections(req.body.startLat, req.body.startLong, req.body.destination, function(directions) {
+    if ("startLat" in req.query) {
+        json = req.query;
+    } else if ("startLat" in req.body) {
+        json = req.body;
+    } else {
+        res.json('error');
+    }
+    directions = module.context.directionsHelper.getDirections(json.startLat, json.startLong, json.destination, function(directions) {
         res.json(directions.routes);
     });
 }
