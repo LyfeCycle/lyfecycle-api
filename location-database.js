@@ -28,7 +28,7 @@ module.exports.locationsWithin = function(req, res) {
     } else if ("topLeftLat" in req.body) {
         json = req.body;
     } else {
-        res.json('error');
+        res.json('could not find parameters');
     }
     module.context.locations.find({
         'latitude':{$gte: json.topLeftLat, $lte: json.botRightLat},
@@ -96,7 +96,7 @@ module.exports.getDirections = function(req, res) {
     } else if ("startLat" in req.body) {
         json = req.body;
     } else {
-        res.json('error');
+        res.json('could not find parameters');
     }
     directions = module.context.directionsHelper.getDirections(json.startLat, json.startLong, json.destination, function(directions) {
         res.json(directions.routes);
