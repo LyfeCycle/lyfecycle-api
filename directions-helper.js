@@ -14,7 +14,7 @@ module.exports.init = function(context, callback) {
 
 // helper function to get directions
 module.exports.getDirections = function(startLat, startLong, destination, callback1) {
-	var directions; // the json obj we'll eventuall return
+	var directions; // the json obj we'll eventually return
 	// build the url for our http request
 	requestPath = "origin="
 				+ startLat + ',' 
@@ -23,7 +23,7 @@ module.exports.getDirections = function(startLat, startLong, destination, callba
 				+ destination 
 				+ module.context.settings.googleDirectionsEndReq;
 	requestURL = module.context.settings.googleDirectionsStartReq+'/json?' + requestPath;
-	console.log(requestURL);
+
 	request(requestURL, function (error, response, body) {
 	  	if (!error && response.statusCode == 200) {
 		    directions = JSON.parse(body);
