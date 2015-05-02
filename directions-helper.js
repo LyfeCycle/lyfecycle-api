@@ -2,7 +2,6 @@ var request = require('request');
 var polyline = require('polyline');
 var mongo = require('mongodb');
 var monk = require('monk');
-var forEach = require('async-foreach').forEach;
 var async = require('async');
 
 
@@ -14,7 +13,7 @@ module.exports.init = function(context, callback) {
 }
 
 // helper function to get directions
-module.exports.getDirections = function(startLat, startLong, destination, bigCallback) {
+module.exports.getDirections = function(startLat, startLong, destination, callback1) {
 	var directions; // the json obj we'll eventuall return
 	// build the url for our http request
 	requestPath = "origin="
@@ -45,18 +44,18 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 		    				thisLong = latLongPair[1];
 			    			if (lastPair.length==0 || (Math.abs(lastPair[0]-thisLat) > displacement && Math.abs(lastPair[1]-thisLong) > displacement)) {
 		    					numQueries += 1;
-		    					asyncTasks.push(function(callback1) {
+		    					asyncTasks.push(function(callback2) {
 		    						module.context.locations.find({
 			    						'latitude':{$gte: thisLat - queryRadius, $lte: thisLat + queryRadius},
 			    						'longitude':{$gte: thisLong - queryRadius, $lte: thisLong + queryRadius}
 				    				}, {"limit":100}, function(err, docs) {
 				    					if (err) {
 				    						console.log(err);
-				    						callback1(); // tell async the task is done
+				    						callback2(); // tell async the task is done
 				    					}
 				    					step.alerts = docs;
 				    					lastAlerts = docs; // store these for next time
-				    					callback1(); // tell async the task is done
+				    					callback2(); // tell async the task is done
 								    }); // end find
 			    				}); // end of push to asyncTasks
 		    				} else {
@@ -72,12 +71,12 @@ module.exports.getDirections = function(startLat, startLong, destination, bigCal
 			  // All tasks are done now
 			  console.log('had to do ' + numQueries + ' queries');
 			  console.log('sending back directions');
-			  bigCallback(directions);
+			  callback1(directions);
 			});
 		} else {
 			// there was an error in the request
 			console.log(error);
-			bigCallback(error);
+			callback1(error);
 		}
 	});
 }
